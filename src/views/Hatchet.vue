@@ -1,26 +1,36 @@
 <template>
-  <article>
-    {{ deck }}
-    <section class="graph">
-      <div class="graph__inner">
+  <article class="helper">
+    <section class="perks">
+      <ul class="perks__list">
+        <li class="perks__listItem" v-for="perk in perks" :key="perk.id">
+          {{ determinePerkText(perk.effect) }}
+        </li>
+      </ul>
+    </section>
+    <section class="chart">
+      <div class="chart__inner">
         <div
           v-for="data in getPercentages"
           :key="data"
-          class="graph__bar"
+          class="chart__bar"
+          :class="[
+            data.type == 'positive'
+              ? 'chart__bar--positive'
+              : 'chart__bar--negative',
+          ]"
           :style="{ '--percent': data.percent + '%' }"
         >
-          <p>Modifer {{ data.modifier }}</p>
-          <p>Percentage {{ data.percent }}</p>
+          <p>{{ data.percent }}</p>
         </div>
       </div>
-      <ul class="graph__axis graph__axis--y">
+      <ul class="chart__axis chart__axis--y">
         <li>100%</li>
         <li>75%</li>
         <li>50%</li>
         <li>25%</li>
         <li>0%</li>
       </ul>
-      <ul class="graph__axis graph__axis--x">
+      <ul class="chart__axis chart__axis--x">
         <li v-for="modifier in getUniqueValues" :key="modifier">
           {{ modifier }}
         </li>
@@ -40,8 +50,44 @@ export default {
   },
   data: function() {
     return {
-      deck: [0, 1, 1],
-      perks: [],
+      deck: [
+        "x0",
+        "-2",
+        "-1",
+        "-1",
+        "-1",
+        "-1",
+        "-1",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2",
+        "x2",
+      ],
+      specialEffects: [],
+      perks: [
+        { id: "1", effect: "1" },
+        { id: "2", effect: "1" },
+        { id: "3", effect: "2" },
+        { id: "4", effect: "3" },
+        { id: "5", effect: "4" },
+        { id: "6", effect: "5" },
+        { id: "7", effect: "6" },
+        { id: "8", effect: "7" },
+        { id: "9", effect: "8" },
+        { id: "10", effect: "9" },
+        { id: "11", effect: "9" },
+        { id: "12", effect: "9" },
+        { id: "13", effect: "10" },
+        { id: "14", effect: "10" },
+        { id: "15", effect: "10" },
+      ],
       selectedPerks: [],
     };
   },
@@ -56,8 +102,15 @@ export default {
       let chartData = [];
       this.getUniqueValues.forEach((modifier) => {
         let numItems = this.deck.filter((card) => card === modifier);
-        let percentage = (numItems.length * 100) / this.getTotalAmount;
-        chartData.push({ modifier: modifier, percent: percentage });
+        let percentage = (
+          (numItems.length * 100) /
+          this.getTotalAmount
+        ).toFixed(2);
+        chartData.push({
+          modifier: modifier,
+          percent: percentage,
+          type: this.determineType(modifier),
+        });
       });
       return chartData;
     },
@@ -67,22 +120,85 @@ export default {
   },
   watch: {},
   methods: {
+    determineType(modifier) {
+      let type = "";
+      if (modifier >= 0 || modifier == "x2") {
+        type = "positive";
+      } else if (modifier < 0 || modifier == "x0") {
+        type = "negative";
+      }
+      return type;
+    },
+    determinePerkText(effect) {
+      let text = "";
+      switch (effect) {
+        case "1":
+          text = "Remove two -1 cards";
+          break;
+        case "2":
+          text = "Replace one +0 card with one +2 MUDDLE card";
+          break;
+        case "3":
+          text = "Replace one +0 card with one +1 POISON card";
+          break;
+        case "4":
+          text = "Replace one +0 card with one +1 WOUND card";
+          break;
+        case "5":
+          text = "Replace one +0 card with one +1 IMMOBILIZE card";
+          break;
+        case "6":
+          text = "Replace one +0 card with one +1 PUSH (2) card";
+          break;
+        case "7":
+          text = "Replace one +0 card with one +0 STUN card";
+          break;
+        case "8":
+          text = "Replace one +1 card with one +1 STUN card";
+          break;
+        case "9":
+          text = "Add one +2 (wind) card";
+          break;
+        case "10":
+          text = "Replace one +1 card one +3 card";
+          break;
+        default:
+          break;
+      }
+      return text;
+    },
     test() {
-      this.deck.push("1");
+      this.deck.push(1);
     },
   },
 };
 </script>
 
 <style lang="scss">
-span {
-  font-weight: bold;
+.helper {
+  display: grid;
+  grid-template-areas: "perks chart";
 }
-.graph {
+.perks {
+  grid-area: perks;
+  &__list {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    margin: 0;
+    text-align: left;
+  }
+  &__listItem {
+    list-style: none;
+  }
+}
+.chart {
   display: grid;
   grid-template-areas:
     "y chart"
     ".  x";
+  grid-template-rows: 90% 10%;
+  grid-area: chart;
   width: 80vw;
   height: 80vh;
   &__axis {
@@ -114,7 +230,12 @@ span {
   }
   &__bar {
     height: var(--percent);
-    background-color: green;
+    &--positive {
+      background-color: green;
+    }
+    &--negative {
+      background-color: red;
+    }
   }
 }
 </style>
