@@ -1,5 +1,12 @@
 <template>
-  <article></article>
+  <article>
+    {{ deck }}
+    <section class="" v-for="data in getPercentages" :key="data">
+      <p>Modifer {{ data.modifier }}</p>
+      <p>Percentage {{ data.percent }}</p>
+    </section>
+    <p @click="test()">test</p>
+  </article>
 </template>
 
 <script>
@@ -24,21 +31,23 @@ export default {
     getUniqueValues() {
       return [...new Set(this.deck)];
     },
+    getPercentages() {
+      let chartData = [];
+      this.getUniqueValues.forEach((modifier) => {
+        let numItems = this.deck.filter((card) => card === modifier);
+        let percentage = (numItems.length * 100) / this.getTotalAmount;
+        chartData.push({ modifier: modifier, percent: percentage });
+      });
+      return chartData;
+    },
   },
   created() {
-    this.determinePercentages();
+    // this.determinePercentages();
   },
   watch: {},
   methods: {
-    determinePercentages() {
-      let values = this.getUniqueValues;
-      let total = this.getTotalAmount;
-      values.forEach((modifier) => {
-        const numItems = this.deck.filter((card) => card === modifier);
-        console.log(
-          `modifier ${modifier} represents ${(numItems.length * 100) / total}%`,
-        );
-      });
+    test() {
+      this.deck.push("1");
     },
   },
 };
