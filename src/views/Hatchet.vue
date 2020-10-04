@@ -1,9 +1,17 @@
 <template>
   <article class="helper">
+    {{ deck }}
     <section class="perks">
       <ul class="perks__list">
         <li class="perks__listItem" v-for="perk in perks" :key="perk.id">
-          {{ determinePerkText(perk.effect) }}
+          <label :for="perk.id">
+            <input
+              :id="perk.id"
+              type="checkbox"
+              @click="perkEffect(perk.effect, $event)"
+            />
+            {{ determinePerkText(perk.effect) }}
+          </label>
         </li>
       </ul>
     </section>
@@ -36,7 +44,6 @@
         </li>
       </ul>
     </section>
-    <p @click="test()">test</p>
   </article>
 </template>
 
@@ -58,16 +65,16 @@ export default {
         "-1",
         "-1",
         "-1",
-        "0",
-        "0",
-        "0",
-        "0",
-        "0",
-        "1",
-        "1",
-        "1",
-        "1",
-        "2",
+        "+0",
+        "+0",
+        "+0",
+        "+0",
+        "+0",
+        "+1",
+        "+1",
+        "+1",
+        "+1",
+        "+2",
         "x2",
       ],
       specialEffects: [],
@@ -120,6 +127,17 @@ export default {
   },
   watch: {},
   methods: {
+    mutateModifier(modifier, toggle) {
+      toggle = toggle ? "add" : "remove";
+      if (toggle === "add") {
+        this.deck.push(modifier);
+      } else {
+        let index = this.deck.indexOf(modifier);
+        if (index > -1) {
+          this.deck.splice(index, 1);
+        }
+      }
+    },
     determineType(modifier) {
       let type = "";
       if (modifier >= 0 || modifier == "x2") {
@@ -167,8 +185,59 @@ export default {
       }
       return text;
     },
-    test() {
-      this.deck.push(1);
+    perkEffect(effect, event) {
+      let toggle = event.target.checked;
+      //For the purposes of toggle, true means to add, and false means to remove
+
+      //Add/Remove two -1 cards
+      if (effect == "1") {
+        this.mutateModifier("-1", !toggle);
+        this.mutateModifier("-1", !toggle);
+      }
+      //Replace one +0 card with one +2 MUDDLE card
+      if (effect == "2") {
+        this.mutateModifier("+0", !toggle);
+        this.mutateModifier("+2", toggle);
+      }
+      //Replace one +0 card with one +1 POISON card
+      if (effect == "3") {
+        this.mutateModifier("+0", !toggle);
+        this.mutateModifier("+1", toggle);
+      }
+      //Replace one +0 card with one +1 WOUND card
+      if (effect == "4") {
+        this.mutateModifier("+0", !toggle);
+        this.mutateModifier("+1", toggle);
+      }
+      //Replace one +0 card with one +1 IMMOBILIZE card
+      if (effect == "5") {
+        this.mutateModifier("+0", !toggle);
+        this.mutateModifier("+1", toggle);
+      }
+      //Replace one +0 card with one +1 PUSH (2) card
+      if (effect == "6") {
+        this.mutateModifier("+0", !toggle);
+        this.mutateModifier("+1", toggle);
+      }
+      //Replace one +0 card with one +0 STUN card
+      if (effect == "7") {
+        this.mutateModifier("+0", !toggle);
+        this.mutateModifier("+0", toggle);
+      }
+      //Replace one +1 card with one +1 STUN card
+      if (effect == "8") {
+        this.mutateModifier("+1", !toggle);
+        this.mutateModifier("+1", toggle);
+      }
+      //Add one +2 (wind) card
+      if (effect == "9") {
+        this.mutateModifier("+2", toggle);
+      }
+      //Replace one +1 card one +3 card
+      if (effect == "10") {
+        this.mutateModifier("+1", !toggle);
+        this.mutateModifier("+3", toggle);
+      }
     },
   },
 };
@@ -197,6 +266,7 @@ export default {
   grid-template-areas:
     "y chart"
     ".  x";
+  grid-template-columns: 10% 90%;
   grid-template-rows: 90% 10%;
   grid-area: chart;
   width: 80vw;
