@@ -27,3 +27,9 @@ label,
 input {
   @include text;
 }
+
+.title {
+  @include text();
+  text-transform: uppercase;
+  font-weight: 600;
+}

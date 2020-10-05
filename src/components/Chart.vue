@@ -1,5 +1,6 @@
 <template>
   <div class="chart">
+    <h2 class="chart__title title">Modifier Graph</h2>
     <div class="chart__inner">
       <div
         v-for="data in getChartData"
@@ -77,13 +78,16 @@ export default {
 .chart {
   display: grid;
   grid-template-areas:
+    "title title"
     "y chart"
     ".  x";
   grid-template-columns: 10% 90%;
-  grid-template-rows: 90% 10%;
-  grid-area: chart;
-  width: 80vw;
-  height: 80vh;
+  grid-template-rows: 20% 70% 10%;
+  column-gap: 20px;
+  height: 100%;
+  &__title {
+    grid-area: title;
+  }
   &__axis {
     display: flex;
     padding: 0;
@@ -109,9 +113,11 @@ export default {
     align-items: flex-end;
     border-left: 1px solid #000;
     border-bottom: 1px solid #000;
+    grid-area: chart;
   }
   &__bar {
     height: var(--percent);
+    min-width: 40px;
     &--positive {
       background-color: green;
     }

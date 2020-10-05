@@ -90,16 +90,33 @@ export default {
 .dashboard {
   display: grid;
   grid-template-areas:
-    "b a"
-    "b c";
+    "b"
+    "a"
+    "c";
+  grid-template-columns: 100%;
+  gap: 30px 30px;
+  max-width: 90vw;
+  margin: 0 auto;
+  @media (min-width: $sm) {
+    grid-template-areas:
+      "b a"
+      "b c";
+    grid-template-columns: 30% 70%;
+    grid-template-rows: 25% 75%;
+    max-width: 90vw;
+  }
   &__a {
     grid-area: a;
   }
   &__b {
     grid-area: b;
+    padding: 24px;
+    background-color: $alt;
   }
   &__c {
     grid-area: c;
+    padding: 24px;
+    background-color: $alt;
   }
 }
 </style>
