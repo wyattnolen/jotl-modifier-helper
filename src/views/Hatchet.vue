@@ -1,6 +1,20 @@
 <template>
   <article class="helper">
     {{ deck }}
+    <section class="snapshots">
+      <div class="snapshot">
+        <p class="snapshot__figure">
+          {{ determineOverallPercents("positive") }}%
+        </p>
+        <p class="snapshot__description">Chance of a positive of modifier</p>
+      </div>
+      <div class="snapshot">
+        <p class="snapshot__figure">
+          {{ determineOverallPercents("negative") }}%
+        </p>
+        <p class="snapshot__description">Chance of a negative of modifier</p>
+      </div>
+    </section>
     <section class="perks">
       <ul class="perks__list">
         <li class="perks__listItem" v-for="perk in perks" :key="perk.id">
@@ -70,6 +84,7 @@ export default {
         "+0",
         "+0",
         "+0",
+        "+0",
         "+1",
         "+1",
         "+1",
@@ -109,13 +124,10 @@ export default {
       let chartData = [];
       this.getUniqueValues.forEach((modifier) => {
         let numItems = this.deck.filter((card) => card === modifier);
-        let percentage = (
-          (numItems.length * 100) /
-          this.getTotalAmount
-        ).toFixed(2);
+        let percentage = (numItems.length * 100) / this.getTotalAmount;
         chartData.push({
           modifier: modifier,
-          percent: percentage,
+          percent: parseFloat(percentage.toFixed(2)),
           type: this.determineType(modifier),
         });
       });
@@ -127,6 +139,22 @@ export default {
   },
   watch: {},
   methods: {
+    determineOverallPercents(request) {
+      let percentTotal = 0;
+      let countOfRequest = 0;
+      let deckSize = this.getTotalAmount;
+      let type = "";
+
+      this.deck.forEach((modifier) => {
+        type = this.determineType(modifier);
+        if (type === request) {
+          countOfRequest += 1;
+        }
+      });
+
+      percentTotal = (countOfRequest * 100) / deckSize;
+      return percentTotal.toFixed(2);
+    },
     mutateModifier(modifier, toggle) {
       toggle = toggle ? "add" : "remove";
       if (toggle === "add") {
@@ -244,10 +272,34 @@ export default {
 </script>
 
 <style lang="scss">
+@import "../scss/_shared.scss";
+
 .helper {
   display: grid;
-  grid-template-areas: "perks chart";
+  grid-template-areas:
+    "perks snapshot"
+    "perks chart";
 }
+.snapshots {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  grid-area: snapshot;
+}
+.snapshot {
+  flex: 0 0 25%;
+  max-width: 25%;
+  padding: 24px;
+  margin-bottom: 30px;
+  background-color: $alt;
+  &__figure {
+    @include text(24px);
+  }
+  &__description {
+  }
+}
+
 .perks {
   grid-area: perks;
   &__list {
