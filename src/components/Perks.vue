@@ -154,4 +154,19 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+@import "../scss/_shared.scss";
+
+.perks {
+  &__list {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    margin: 0;
+    text-align: left;
+  }
+  &__listItem {
+    list-style: none;
+  }
+}
+</style>

@@ -57,4 +57,25 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+@import "../scss/_shared.scss";
+
+.snapshots {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.snapshot {
+  flex: 0 0 25%;
+  max-width: 25%;
+  padding: 24px;
+  margin-bottom: 30px;
+  background-color: $alt;
+  &__figure {
+    @include text(24px);
+  }
+  &__description {
+  }
+}
+</style>

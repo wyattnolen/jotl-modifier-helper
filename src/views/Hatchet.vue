@@ -80,16 +80,6 @@ export default {
     removeFromDeck(index) {
       this.deck.splice(index, 1);
     },
-
-    determineType(modifier) {
-      let type = "";
-      if (modifier >= 0 || modifier == "x2") {
-        type = "positive";
-      } else if (modifier < 0 || modifier == "x0") {
-        type = "negative";
-      }
-      return type;
-    },
   },
 };
 </script>
@@ -110,83 +100,6 @@ export default {
   }
   &__c {
     grid-area: c;
-  }
-}
-.snapshots {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-between;
-}
-.snapshot {
-  flex: 0 0 25%;
-  max-width: 25%;
-  padding: 24px;
-  margin-bottom: 30px;
-  background-color: $alt;
-  &__figure {
-    @include text(24px);
-  }
-  &__description {
-  }
-}
-
-.perks {
-  &__list {
-    display: flex;
-    flex-direction: column;
-    padding: 0;
-    margin: 0;
-    text-align: left;
-  }
-  &__listItem {
-    list-style: none;
-  }
-}
-.chart {
-  display: grid;
-  grid-template-areas:
-    "y chart"
-    ".  x";
-  grid-template-columns: 10% 90%;
-  grid-template-rows: 90% 10%;
-  grid-area: chart;
-  width: 80vw;
-  height: 80vh;
-  &__axis {
-    display: flex;
-    padding: 0;
-    margin: 0;
-    &--y {
-      flex-direction: column;
-      justify-content: space-between;
-      grid-area: y;
-    }
-    &--x {
-      flex-direction: row;
-      justify-content: space-around;
-      grid-area: x;
-    }
-    > li {
-      list-style: none;
-    }
-  }
-  &__inner {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: flex-end;
-    border-left: 1px solid #000;
-    border-bottom: 1px solid #000;
-  }
-  &__bar {
-    height: var(--percent);
-    &--positive {
-      background-color: green;
-    }
-    &--negative {
-      background-color: red;
-    }
   }
 }
 </style>

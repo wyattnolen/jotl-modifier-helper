@@ -71,4 +71,53 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+@import "../scss/_shared.scss";
+
+.chart {
+  display: grid;
+  grid-template-areas:
+    "y chart"
+    ".  x";
+  grid-template-columns: 10% 90%;
+  grid-template-rows: 90% 10%;
+  grid-area: chart;
+  width: 80vw;
+  height: 80vh;
+  &__axis {
+    display: flex;
+    padding: 0;
+    margin: 0;
+    &--y {
+      flex-direction: column;
+      justify-content: space-between;
+      grid-area: y;
+    }
+    &--x {
+      flex-direction: row;
+      justify-content: space-around;
+      grid-area: x;
+    }
+    > li {
+      list-style: none;
+    }
+  }
+  &__inner {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: flex-end;
+    border-left: 1px solid #000;
+    border-bottom: 1px solid #000;
+  }
+  &__bar {
+    height: var(--percent);
+    &--positive {
+      background-color: green;
+    }
+    &--negative {
+      background-color: red;
+    }
+  }
+}
+</style>
