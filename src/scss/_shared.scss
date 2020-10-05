@@ -1,0 +1,29 @@
+@import "./variables";
+@import "./mixins";
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  background-color: $pri;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  @include text(18px);
+}
+
+p,
+a,
+label,
+input {
+  @include text;
+}
