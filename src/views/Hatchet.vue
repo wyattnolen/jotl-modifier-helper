@@ -102,7 +102,7 @@ export default {
       "b a"
       "b c";
     grid-template-columns: 30% 70%;
-    grid-template-rows: 25% 75%;
+    grid-template-rows: 0fr 1fr;
     max-width: 90vw;
   }
   &__a {
@@ -111,11 +111,13 @@ export default {
   &__b {
     grid-area: b;
     padding: 24px;
+    border-radius: 4px;
     background-color: $alt;
   }
   &__c {
     grid-area: c;
     padding: 24px;
+    border-radius: 4px;
     background-color: $alt;
   }
 }

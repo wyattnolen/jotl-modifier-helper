@@ -71,6 +71,7 @@ export default {
   max-width: 100%;
   padding: 24px;
   background-color: $alt;
+  border-radius: 4px;
   @media (min-width: $sm) {
     flex: 0 0 25%;
     max-width: 25%;

@@ -79,12 +79,21 @@ export default {
   display: grid;
   grid-template-areas:
     "title title"
-    "y chart"
-    ".  x";
+    "x chart"
+    ".  y";
   grid-template-columns: 10% 90%;
-  grid-template-rows: 20% 70% 10%;
-  column-gap: 20px;
+  grid-template-rows: 10% 80% 10%;
   height: 100%;
+  @media (min-width: $sm) {
+    grid-template-areas:
+      "title title"
+      "y chart"
+      ".  x";
+    grid-template-columns: 10% 90%;
+    grid-template-rows: 20% 70% 10%;
+    column-gap: 20px;
+  }
+
   &__title {
     grid-area: title;
   }
@@ -93,36 +102,90 @@ export default {
     padding: 0;
     margin: 0;
     &--y {
-      flex-direction: column;
-      justify-content: space-between;
+      flex-direction: row-reverse;
+      justify-content: space-around;
       grid-area: y;
+      @media (min-width: $sm) {
+        flex-direction: column;
+        justify-content: space-between;
+        margin: 0;
+        line-height: 0;
+        align-items: flex-end;
+      }
+      > li {
+        @media (min-width: $sm) {
+          margin: 0;
+          line-height: 0;
+        }
+      }
     }
     &--x {
-      flex-direction: row;
-      justify-content: space-around;
+      flex-direction: column;
+      justify-content: space-between;
       grid-area: x;
+      @media (min-width: $sm) {
+        flex-direction: row;
+        justify-content: space-around;
+      }
+      > li {
+        margin: 0;
+        line-height: 0;
+      }
     }
+
     > li {
       list-style: none;
     }
   }
   &__inner {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-around;
-    align-items: flex-end;
-    border-left: 1px solid #000;
-    border-bottom: 1px solid #000;
+    align-items: flex-start;
+    background: repeating-linear-gradient(
+      transparent 24.5%,
+      transparent 49.5%,
+      $pri 50%,
+      $pri 50%
+    );
+    border-left: 1px solid $pri;
+    border-bottom: 1px solid $pri;
     grid-area: chart;
+
+    @media (min-width: $sm) {
+      flex-direction: row;
+      align-items: flex-end;
+    }
   }
   &__bar {
-    height: var(--percent);
-    min-width: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: var(--percent);
+    min-height: 40px;
+    margin: 10px 0;
+
+    @media (min-width: $sm) {
+      width: auto;
+      height: var(--percent);
+      min-width: 40px;
+      margin: 0;
+    }
+
     &--positive {
-      background-color: green;
+      background-color: $positive;
     }
     &--negative {
-      background-color: red;
+      background-color: $negative;
+    }
+    > p {
+      margin: 0;
+      margin-right: -30px;
+      @media (min-width: $sm) {
+        margin-right: 0;
+        margin-top: -30px;
+      }
     }
   }
 }
