@@ -1,5 +1,5 @@
 <template>
-  <div class="chart">
+  <div class="chart" style="--ay: 2;">
     <h2 class="chart__title title">Modifier Graph</h2>
     <div class="chart__inner">
       <div
@@ -17,8 +17,6 @@
       </div>
     </div>
     <ul class="chart__axis chart__axis--y">
-      <li>100%</li>
-      <li>75%</li>
       <li>50%</li>
       <li>25%</li>
       <li>0%</li>
@@ -190,7 +188,7 @@ export default {
     flex-direction: column;
     justify-content: center;
     align-items: flex-end;
-    width: var(--percent);
+    width: calc(var(--percent) * (100 / (var(--ay) * 25)));
     min-height: 40px;
     margin: 10px 0;
 
@@ -198,7 +196,7 @@ export default {
       justify-content: flex-start;
       align-items: center;
       width: auto;
-      height: var(--percent);
+      height: calc(var(--percent) * (100 / (var(--ay) * 25)));
       min-width: 40px;
       margin: 0;
     }
