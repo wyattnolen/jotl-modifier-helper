@@ -110,15 +110,11 @@ export default {
   }
   &__b {
     grid-area: b;
-    padding: 24px;
-    border-radius: 4px;
-    background-color: $alt;
+    @include card;
   }
   &__c {
     grid-area: c;
-    padding: 24px;
-    border-radius: 4px;
-    background-color: $alt;
+    @include card;
   }
 }
 </style>
