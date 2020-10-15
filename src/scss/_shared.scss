@@ -29,10 +29,6 @@ li {
   @include text;
 }
 
-label {
-  vertical-align: middle;
-}
-
 .title {
   @include text();
   text-transform: uppercase;

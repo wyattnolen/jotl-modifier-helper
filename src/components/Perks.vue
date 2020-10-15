@@ -175,6 +175,10 @@ export default {
     list-style: none;
     margin: 0;
   }
+  label {
+    display: flex;
+    align-items: baseline;
+  }
   input {
     margin-right: 10px;
   }

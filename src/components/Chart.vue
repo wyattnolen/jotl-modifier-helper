@@ -103,7 +103,7 @@ export default {
     margin: 0;
     &--y {
       flex-direction: row-reverse;
-      justify-content: space-around;
+      justify-content: space-between;
       grid-area: y;
       @media (min-width: $sm) {
         flex-direction: column;
@@ -112,8 +112,25 @@ export default {
         line-height: 0;
         align-items: flex-end;
       }
-      > li {
+    > li {
+      flex-basis: 20%;
+      &:nth-child(1) {
+        text-align: right;
+      }
+      &:nth-child(2) {
+        text-align: right;
+      }
+      &:nth-child(3) {
+        text-align: center;
+      }
+      &:nth-child(4) {
+        text-align: left;
+      }
+      &:nth-child(5) {
+        text-align: left;
+      }
         @media (min-width: $sm) {
+          flex-basis: auto;
           margin: 0;
           line-height: 0;
         }
@@ -127,9 +144,12 @@ export default {
         flex-direction: row;
         justify-content: space-around;
       }
+
       > li {
-        margin: 0;
-        line-height: 0;
+        margin: 10px 0;
+        @media (min-width: $sm) {
+          margin: 0;
+        }
       }
     }
 
@@ -142,12 +162,20 @@ export default {
     flex-direction: column;
     justify-content: space-around;
     align-items: flex-start;
-    background: repeating-linear-gradient(
+        background: repeating-linear-gradient(
+          to right,
       transparent 24.5%,
       transparent 49.5%,
       $pri 50%,
-      $pri 50%
-    );
+      $pri 50%);
+        @media (min-width: $sm) {
+              background: repeating-linear-gradient(
+      transparent 24.5%,
+      transparent 49.5%,
+      $pri 50%,
+      $pri 50%);
+        }
+
     border-left: 1px solid $pri;
     border-bottom: 1px solid $pri;
     grid-area: chart;
@@ -160,13 +188,15 @@ export default {
   &__bar {
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
+    justify-content: center;
+    align-items: flex-end;
     width: var(--percent);
     min-height: 40px;
     margin: 10px 0;
 
     @media (min-width: $sm) {
+      justify-content: flex-start;
+      align-items: center;
       width: auto;
       height: var(--percent);
       min-width: 40px;
