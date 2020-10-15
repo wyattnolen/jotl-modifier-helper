@@ -1,5 +1,6 @@
 <template>
   <div class="chart">
+    <h2 class="chart__title title">Modifier Graph</h2>
     <div class="chart__inner">
       <div
         v-for="data in getChartData"
@@ -77,46 +78,144 @@ export default {
 .chart {
   display: grid;
   grid-template-areas:
-    "y chart"
-    ".  x";
+    "title title"
+    "x chart"
+    ".  y";
   grid-template-columns: 10% 90%;
-  grid-template-rows: 90% 10%;
-  grid-area: chart;
-  width: 80vw;
-  height: 80vh;
+  grid-template-rows: 10% 80% 10%;
+  height: 100%;
+  @media (min-width: $sm) {
+    grid-template-areas:
+      "title title"
+      "y chart"
+      ".  x";
+    grid-template-columns: 10% 90%;
+    grid-template-rows: 10% 80% 10%;
+    column-gap: 20px;
+  }
+
+  &__title {
+    grid-area: title;
+  }
   &__axis {
     display: flex;
     padding: 0;
     margin: 0;
     &--y {
-      flex-direction: column;
+      flex-direction: row-reverse;
       justify-content: space-between;
       grid-area: y;
+      @media (min-width: $sm) {
+        flex-direction: column;
+        justify-content: space-between;
+        margin: 0;
+        line-height: 0;
+        align-items: flex-end;
+      }
+    > li {
+      flex-basis: 20%;
+      &:nth-child(1) {
+        text-align: right;
+      }
+      &:nth-child(2) {
+        text-align: right;
+      }
+      &:nth-child(3) {
+        text-align: center;
+      }
+      &:nth-child(4) {
+        text-align: left;
+      }
+      &:nth-child(5) {
+        text-align: left;
+      }
+        @media (min-width: $sm) {
+          flex-basis: auto;
+          margin: 0;
+          line-height: 0;
+        }
+      }
     }
     &--x {
-      flex-direction: row;
-      justify-content: space-around;
+      flex-direction: column;
+      justify-content: space-between;
       grid-area: x;
+      @media (min-width: $sm) {
+        flex-direction: row;
+        justify-content: space-around;
+      }
+
+      > li {
+        margin: 10px 0;
+        @media (min-width: $sm) {
+          margin: 0;
+        }
+      }
     }
+
     > li {
       list-style: none;
     }
   }
   &__inner {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-around;
-    align-items: flex-end;
-    border-left: 1px solid #000;
-    border-bottom: 1px solid #000;
+    align-items: flex-start;
+        background: repeating-linear-gradient(
+          to right,
+      transparent 24.5%,
+      transparent 49.5%,
+      $pri 50%,
+      $pri 50%);
+        @media (min-width: $sm) {
+              background: repeating-linear-gradient(
+      transparent 24.5%,
+      transparent 49.5%,
+      $pri 50%,
+      $pri 50%);
+        }
+
+    border-left: 1px solid $pri;
+    border-bottom: 1px solid $pri;
+    grid-area: chart;
+
+    @media (min-width: $sm) {
+      flex-direction: row;
+      align-items: flex-end;
+    }
   }
   &__bar {
-    height: var(--percent);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    width: var(--percent);
+    min-height: 40px;
+    margin: 10px 0;
+
+    @media (min-width: $sm) {
+      justify-content: flex-start;
+      align-items: center;
+      width: auto;
+      height: var(--percent);
+      min-width: 40px;
+      margin: 0;
+    }
+
     &--positive {
-      background-color: green;
+      background-color: $positive;
     }
     &--negative {
-      background-color: red;
+      background-color: $negative;
+    }
+    > p {
+      margin: 0;
+      margin-right: -30px;
+      @media (min-width: $sm) {
+        margin-right: 0;
+        margin-top: -30px;
+      }
     }
   }
 }

@@ -6,6 +6,7 @@
     </section>
 
     <section class="dashboard__b">
+      <Character></Character>
       <Perks
         v-bind:deck="deck"
         @add-to-deck="addToDeck"
@@ -25,6 +26,7 @@
 
 <script>
 import Snapshots from "@/components/Snapshots.vue";
+import Character from "@/components/Character.vue";
 import Perks from "@/components/Perks.vue";
 import Chart from "@/components/Chart.vue";
 
@@ -32,6 +34,7 @@ export default {
   name: "Hatchet",
   components: {
     Snapshots,
+    Character,
     Perks,
     Chart,
   },
@@ -59,6 +62,8 @@ export default {
         "x2",
       ],
       specialEffects: [],
+      characters: [],
+      selectedCharacter: "",
     };
   },
   computed: {
@@ -90,16 +95,31 @@ export default {
 .dashboard {
   display: grid;
   grid-template-areas:
-    "b a"
-    "b c";
+    "b"
+    "a"
+    "c";
+  grid-template-columns: 100%;
+  gap: 30px 30px;
+  max-width: 90vw;
+  margin: 0 auto;
+  @media (min-width: $sm) {
+    grid-template-areas:
+      "b a"
+      "b c";
+    grid-template-columns: 30% 70%;
+    grid-template-rows: 0fr 1fr;
+    max-width: 90vw;
+  }
   &__a {
     grid-area: a;
   }
   &__b {
     grid-area: b;
+    @include card;
   }
   &__c {
     grid-area: c;
+    @include card;
   }
 }
 </style>

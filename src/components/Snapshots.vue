@@ -1,16 +1,16 @@
 <template>
   <div class="snapshots">
     <div class="snapshot">
+      <p class="snapshot__description title">Positive Modifiers</p>
       <p class="snapshot__figure">
         {{ determineOverallPercents("positive") }}%
       </p>
-      <p class="snapshot__description">Chance of a positive of modifier</p>
     </div>
     <div class="snapshot">
+      <p class="snapshot__description title">Negative Modifiers</p>
       <p class="snapshot__figure">
         {{ determineOverallPercents("negative") }}%
       </p>
-      <p class="snapshot__description">Chance of a negative of modifier</p>
     </div>
   </div>
 </template>
@@ -64,14 +64,16 @@ export default {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: space-between;
+  gap: 30px;
 }
 .snapshot {
-  flex: 0 0 25%;
-  max-width: 25%;
-  padding: 24px;
-  margin-bottom: 30px;
-  background-color: $alt;
+  flex: 0 0 100%;
+  max-width: 100%;
+  @include card;
+  @media (min-width: $sm) {
+    flex: 0 0 auto;
+    max-width: 50%;
+  }
   &__figure {
     @include text(24px);
   }
