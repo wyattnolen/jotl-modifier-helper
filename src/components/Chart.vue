@@ -90,7 +90,7 @@ export default {
       "y chart"
       ".  x";
     grid-template-columns: 10% 90%;
-    grid-template-rows: 20% 70% 10%;
+    grid-template-rows: 10% 80% 10%;
     column-gap: 20px;
   }
 
