@@ -1,5 +1,5 @@
 <template>
-  <article class="dashboard">
+  <article class="dashboard" v-bind:class="'dashboard--' + selectedCharacter">
     <div class="dashboard__inner">
       <section class="dashboard__a">
         <Snapshots v-bind:deck="deck" v-bind:deckLength="getTotalAmount">
@@ -7,9 +7,13 @@
       </section>
 
       <section class="dashboard__b">
-        <Character></Character>
+        <Character
+          v-bind:selectedCharacter="selectedCharacter"
+          @update-selected="updateSelectedCharacter"
+        ></Character>
         <Perks
           v-bind:deck="deck"
+          v-bind:selectedCharacter="selectedCharacter"
           @add-to-deck="addToDeck"
           @remove-from-deck="removeFromDeck"
         ></Perks>
@@ -64,8 +68,8 @@
           "x2"
         ],
         specialEffects: [],
-        characters: [],
-        selectedCharacter: ""
+        selectedCharacter: "1",
+        characterDecks: []
       };
     },
     computed: {
@@ -76,16 +80,22 @@
         return [...new Set(this.deck)];
       }
     },
-    created() {
-      // this.determinePercentages();
+    created() {},
+    watch: {
+      selectedCharacter: function() {
+        this.resetDeck();
+      }
     },
-    watch: {},
     methods: {
       addToDeck(modifier) {
         this.deck.push(modifier);
       },
       removeFromDeck(index) {
         this.deck.splice(index, 1);
+      },
+      resetDeck() {},
+      updateSelectedCharacter(character) {
+        this.selectedCharacter = character;
       }
     }
   };
@@ -107,24 +117,33 @@
     padding: 30px 5vw;
     margin: 0 auto;
     background-color: var(--pri);
-
-    &.hatchet {
+    /* Hatchet */
+    &--1 {
       --pri: #aba194;
       --alt: #ddd1c7;
+      --cImage: url("../assets/1.jpg");
     }
-    &.demolitionist {
+    /* Red Guard */
+    &--2 {
       --pri: #aba194;
       --alt: #ddd1c7;
+      --cImage: url("../assets/2.jpg");
     }
-    &.redguard {
-      --pri: #aba194;
-      --alt: #ddd1c7;
-    }
-    &.voidwarden {
+    /* Voidwarden */
+    &--3 {
       --pri: #1a1c2a;
       --alt: #222437;
       --textColor: #a5a6ad;
       --titleColor: #fff;
+      --cImage: url("../assets/3.jpg");
+    }
+    /* Demolitionist */
+    &--4 {
+      --pri: #1a1c2a;
+      --alt: #222437;
+      --textColor: #a5a6ad;
+      --titleColor: #fff;
+      --cImage: url("../assets/4.jpg");
     }
 
     &__inner {
