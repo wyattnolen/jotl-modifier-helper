@@ -7,10 +7,11 @@
 
 html,
 body {
+  height: 100vh;
   padding: 0;
   margin: 0;
   margin-bottom: 30px;
-  background-color: $pri;
+  background-color: transparent;
 }
 
 h1,
@@ -19,7 +20,7 @@ h3,
 h4,
 h5,
 h6 {
-  @include text(18px);
+  @include text(18px, $c: var(--titleColor));
 }
 
 p,
@@ -30,7 +31,7 @@ li {
 }
 
 .title {
-  @include text();
+  @include text($c: var(--titleColor));
   text-transform: uppercase;
   font-weight: 600;
 }
