@@ -69,24 +69,39 @@
           "x2"
         ],
         perks: [
-          { id: "1", effect: "1" },
-          { id: "2", effect: "1" },
-          { id: "3", effect: "2" },
-          { id: "4", effect: "3" },
-          { id: "5", effect: "4" },
-          { id: "6", effect: "5" },
-          { id: "7", effect: "6" },
-          { id: "8", effect: "7" },
-          { id: "9", effect: "8" },
-          { id: "10", effect: "9" },
-          { id: "11", effect: "9" },
-          { id: "12", effect: "9" },
-          { id: "13", effect: "10" },
-          { id: "14", effect: "10" },
-          { id: "15", effect: "10" }
+          //Remove four +0 cards
+          { id: "46", effect: "11" },
+          //Remove two -1 cards
+          { id: "47", effect: "1" },
+          //Remove two -1 cards
+          { id: "48", effect: "1" },
+          //Remove one -2 card and +1 card
+          { id: "49", effect: "12" },
+          //Replace one +0 card with one +2 MUDDLE card
+          { id: "50", effect: "2" },
+          //Replace one +0 card with one +2 MUDDLE card
+          { id: "51", effect: "2" },
+          //Replace one -1 card with one +0 POISON card
+          { id: "52", effect: "26" },
+          //Add one +2 card
+          { id: "53", effect: "27" },
+          //Add one +2 card
+          { id: "54", effect: "27" },
+          //Replace one +1 card with one +2 (earth) card
+          { id: "55", effect: "28" },
+          //Replace one +1 card with one +2 (earth) card
+          { id: "56", effect: "28" },
+          //Replace one +1 card with one +2 (fire) card
+          { id: "57", effect: "14" },
+          //Replace one +1 card with one +2 (fire) card
+          { id: "58", effect: "14" },
+          //Add one +0 (All adjacent enemies suffer 1 damage) card
+          { id: "59", effect: "29" },
+          //Add one +0 (All adjacent enemies suffer 1 damage) card
+          { id: "60", effect: "29" }
         ],
         specialEffects: [],
-        selectedCharacter: "1",
+        selectedCharacter: "4",
         characterDecks: []
       };
     },

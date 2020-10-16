@@ -69,24 +69,39 @@
           "x2"
         ],
         perks: [
-          { id: "1", effect: "1" },
-          { id: "2", effect: "1" },
-          { id: "3", effect: "2" },
-          { id: "4", effect: "3" },
-          { id: "5", effect: "4" },
-          { id: "6", effect: "5" },
-          { id: "7", effect: "6" },
-          { id: "8", effect: "7" },
-          { id: "9", effect: "8" },
-          { id: "10", effect: "9" },
-          { id: "11", effect: "9" },
-          { id: "12", effect: "9" },
-          { id: "13", effect: "10" },
-          { id: "14", effect: "10" },
-          { id: "15", effect: "10" }
+          //Remove four +0 cards
+          { id: "16", effect: "11" },
+          //Remove two -1 cards
+          { id: "17", effect: "1" },
+          //Remove one -2 card and one +1 card
+          { id: "18", effect: "12" },
+          //Replace one -1 card with one +1 card
+          { id: "19", effect: "13" },
+          //Replace one -1 card with one +1 card
+          { id: "20", effect: "13" },
+          //Replace one +1 card with one +2 (fire) card
+          { id: "21", effect: "14" },
+          //Replace one +1 card with one +2 (fire) card
+          { id: "22", effect: "14" },
+          //Replace one +1 card with one +2 (sun) card
+          { id: "23", effect: "15" },
+          //Replace one +1 card with one +2 (sun) card
+          { id: "24", effect: "15" },
+          //Add one +1 (fire and sun) card
+          { id: "25", effect: "16" },
+          //Add one +1 (fire and sun) card
+          { id: "26", effect: "16" },
+          //Add one +1 (shield 1) card
+          { id: "27", effect: "17" },
+          //Add one +1 (shield 1) card
+          { id: "28", effect: "17" },
+          //Replace one +0 card with one +1 IMMOBILIZE card
+          { id: "29", effect: "5" },
+          //Replace one +0 card with one +1 WOUND card
+          { id: "30", effect: "4" }
         ],
         specialEffects: [],
-        selectedCharacter: "1",
+        selectedCharacter: "2",
         characterDecks: []
       };
     },

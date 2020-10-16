@@ -1,5 +1,5 @@
 <template>
-  <div class="chart" style="--ay: 2;">
+  <div class="chart" style="--ay: 3;">
     <h2 class="chart__title title">Modifier Graph</h2>
     <div class="chart__inner">
       <div
@@ -17,6 +17,8 @@
       </div>
     </div>
     <ul class="chart__axis chart__axis--y">
+      <!-- <li>100%</li> -->
+      <li>75%</li>
       <li>50%</li>
       <li>25%</li>
       <li>0%</li>

@@ -69,24 +69,39 @@
           "x2"
         ],
         perks: [
-          { id: "1", effect: "1" },
-          { id: "2", effect: "1" },
-          { id: "3", effect: "2" },
-          { id: "4", effect: "3" },
-          { id: "5", effect: "4" },
-          { id: "6", effect: "5" },
-          { id: "7", effect: "6" },
-          { id: "8", effect: "7" },
-          { id: "9", effect: "8" },
-          { id: "10", effect: "9" },
-          { id: "11", effect: "9" },
-          { id: "12", effect: "9" },
-          { id: "13", effect: "10" },
-          { id: "14", effect: "10" },
-          { id: "15", effect: "10" }
+          //Remove two -1 cards
+          { id: "31", effect: "1" },
+          //Remove one -2 card
+          { id: "32", effect: "18" },
+          //Replace one +0 with one +1 (shadow) card
+          { id: "33", effect: "19" },
+          //Replace one +0 with one +1 (shadow) card
+          { id: "34", effect: "19" },
+          //Replace one +0 with one +1 (ice) card
+          { id: "35", effect: "20" },
+          //Replace one +0 with one +1 (ice) card
+          { id: "36", effect: "20" },
+          //Replace one -1 with one +0 (heal 1, ally) card
+          { id: "37", effect: "21" },
+          //Replace one -1 with one +0 (heal 1, ally) card
+          { id: "38", effect: "21" },
+          //Add one +1 (heal 1, ally) card
+          { id: "39", effect: "22" },
+          //Add one +1 (heal 1, ally) card
+          { id: "40", effect: "22" },
+          //Add one +1 (heal 1, ally) card
+          { id: "41", effect: "22" },
+          //Add one +1 POISON card
+          { id: "42", effect: "23" },
+          //Add one +3 card
+          { id: "43", effect: "24" },
+          //Add one +1 CURSE card
+          { id: "44", effect: "25" },
+          //Add one +1 CURSE card
+          { id: "45", effect: "25" }
         ],
         specialEffects: [],
-        selectedCharacter: "1",
+        selectedCharacter: "3",
         characterDecks: []
       };
     },
